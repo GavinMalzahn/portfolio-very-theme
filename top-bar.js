@@ -9,15 +9,15 @@ import '@haxtheweb/scroll-button/scroll-button.js';
 
 
 /**
- * `portfolio-very-theme`
+ * `top-bar`
  * 
  * @demo index.html
- * @element portfolio-very-theme
+ * @element top-bar
  */
 export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
 
   static get tag() {
-    return "portfolio-very-theme";
+    return "top-bar";
   }
 
   constructor() {
@@ -31,7 +31,7 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
     this.registerLocalization({
       context: this,
       localesPath:
-        new URL("./locales/portfolio-very-theme.ar.json", import.meta.url).href +
+        new URL("./locales/top-bar.ar.json", import.meta.url).href +
         "/../",
       locales: ["ar", "es", "hi", "zh"],
     });
@@ -58,9 +58,28 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
       .wrapper {
         margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
+        background-color: purple;
+        min-height: 100px;
+        width: 100%;
+        top: 100px;
+        position: fixed;
+        align-items: center;
+        display: flex;
+        justify-content: center;
       }
-      h3 span {
+      .top-bar-buttons {
+        display: flex;
+        gap: var(--ddd-spacing-2);
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+      }
+      .top-bar-buttons a {
+        color: var(--ddd-theme-primary);
         font-size: var(--portfolio-very-theme-label-font-size, var(--ddd-font-size-s));
+        padding: 10px;
+        border-radius: 5px;
+        
       }
     `];
   }
@@ -69,7 +88,12 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
   render() {
     return html`
     <div class="wrapper">
-      
+      <div class="top-bar-buttons">
+        <a href="#1">About</a>
+        <a href="#2">Research</a>
+        <a href="#3">Presentations and Publications</a>
+        <a href="#4">Professional Development</a>
+      </div>
     </div>`;
   }
 
