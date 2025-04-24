@@ -23,18 +23,8 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
   constructor() {
     super();
     this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
-    };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/portfolio-very-theme.ar.json", import.meta.url).href +
-        "/../",
-      locales: ["ar", "es", "hi", "zh"],
-    });
+    this.backgroundColor = "blue";
+    
   }
 
   // Lit reactive properties
@@ -42,6 +32,7 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
     return {
       ...super.properties,
       title: { type: String },
+      backgroundColor: { type: String },
     };
   }
 
@@ -52,15 +43,23 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
       :host {
         display: block;
         color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
+        background-color: blue;
         font-family: var(--ddd-font-navigation);
+        width: calc(100vw - 24px);
+        height: calc(100vh);
+
       }
       .wrapper {
-        margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
       }
       h3 span {
         font-size: var(--portfolio-very-theme-label-font-size, var(--ddd-font-size-s));
+      }
+      .title {
+        font-size: var(--portfolio-very-theme-title-font-size, var(--ddd-font-size-l));
+        color: var(--portfolio-very-theme-title-color, var(--ddd-theme-primary));
+        text-align: center;
+
       }
     `];
   }
@@ -69,7 +68,7 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
   render() {
     return html`
     <div class="wrapper">
-      
+      <h1 class="title">${this.title}</h1>
     </div>`;
   }
 
