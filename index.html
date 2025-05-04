@@ -7,47 +7,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="Description" content="Demonstration for portfolio-very-theme">
-
 </head>
 
-<body>
-  <top-bar>
-    <h1>Top Bar</h1>
-  </top-bar>
-  
-  <a name="1">
-    <portfolio-very-theme 
-    title="About"
-    >
-    </portfolio-very-theme>
-  </a>
-  <a name="2">
-    <portfolio-very-theme  
-    title="Research"
-    >
-    </portfolio-very-theme>
-  </a>
-  <a name="3">
-    <portfolio-very-theme  
-    title="Presentations and Publications"
-    >
-    </portfolio-very-theme>
-  </a>
-  <a name="4">
-    <portfolio-very-theme  
-    title="Professional Development"
-    >
-    </portfolio-very-theme>
-  </a>
-  <a name="5">
-    <portfolio-very-theme 
-    title="Contact"
-    >
-    </portfolio-very-theme>
-  </a>
-
-</body>
 <script type="module" src="./portfolio-very-theme.js"></script>
 <script type="module" src="./top-bar.js"></script>
 <script type="module" src="https://cdn.hax.cloud/cdn/build/es6/node_modules/@haxtheweb/scroll-button/scroll-button.js"></script>
+<script type="module" src="./portfolio-page.js"></script>
+
+<body>
+  <portfolio-very-theme>
+    <portfolio-page title="About Me" pageNumber="1" data-primary=var(--ddd-theme-default-nittanyNavy)>
+      <div>
+        <p>My name is Gavin Malzahn.</p>
+      </div>
+    </portfolio-page>
+    <portfolio-page title="Research" pageNumber="2" data-primary=var(--ddd-theme-default-nittanyNavy)>
+      <div>
+        <p>My research interests include the intersection of machine learning and human-computer interaction.</p>
+      </div>
+    </portfolio-page>
+    <portfolio-page title="Presentations and Publications" pageNumber="3" data-primary=var(--ddd-theme-default-nittanyNavy)>
+      <div>
+        <p>My work has been presented at various conferences.</p>
+      </div>
+    </portfolio-page>
+    <portfolio-page title="Professional Development" pageNumber="4" data-primary=var(--ddd-theme-default-nittanyNavy)>
+      <div>
+        <p>I have participated in various workshops and training sessions.</p>
+      </div>
+    </portfolio-page>
+    <portfolio-page title="Contact" pageNumber="5" data-primary=var(--ddd-theme-default-nittanyNavy)>
+      <div>
+        <p>You can reach me at my email: </p>
+        <a href="mailto:gavin.malzahn@gmail.com">gavin.malzahn@gmail.com</a>
+      </div>
+    </portfolio-page>
+  </portfolio-very-theme>
+
+</body>
+
 </html>

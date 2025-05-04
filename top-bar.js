@@ -14,7 +14,7 @@ import '@haxtheweb/scroll-button/scroll-button.js';
  * @demo index.html
  * @element top-bar
  */
-export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
+export class TopBar extends DDDSuper(I18NMixin(LitElement)) {
 
   static get tag() {
     return "top-bar";
@@ -22,45 +22,19 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
-    };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/top-bar.ar.json", import.meta.url).href +
-        "/../",
-      locales: ["ar", "es", "hi", "zh"],
-    });
-  }
-
-  // Lit reactive properties
-  static get properties() {
-    return {
-      ...super.properties,
-      title: { type: String },
-    };
   }
 
   // Lit scoped styles
   static get styles() {
     return [super.styles,
     css`
-      :host {
-        display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
-      }
+      
       .wrapper {
         margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
-        background-color: purple;
-        min-height: 100px;
-        width: 100%;
+        background-color: var(--ddd-theme-default-beaver80);
+        max-height: 100px;
+        width: calc(100vw - 24px);
         top: 100px;
         position: fixed;
         align-items: center;
@@ -74,13 +48,7 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
         align-items: center;
         margin: 10px;
       }
-      .top-bar-buttons a {
-        color: var(--ddd-theme-primary);
-        font-size: var(--portfolio-very-theme-label-font-size, var(--ddd-font-size-s));
-        padding: 10px;
-        border-radius: 5px;
-        
-      }
+      
     `];
   }
 
@@ -89,21 +57,12 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
     return html`
     <div class="wrapper">
       <div class="top-bar-buttons">
-        <a href="#1">About</a>
-        <a href="#2">Research</a>
-        <a href="#3">Presentations and Publications</a>
-        <a href="#4">Professional Development</a>
+        <slot>
+        </slot>
       </div>
     </div>`;
-  }
-
-  /**
-   * haxProperties integration via file reference
-   */
-  static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
-  }
+  }  
+  
 }
 
-globalThis.customElements.define(PortfolioVeryTheme.tag, PortfolioVeryTheme);
+globalThis.customElements.define(TopBar.tag, TopBar);

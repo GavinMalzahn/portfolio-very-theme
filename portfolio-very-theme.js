@@ -22,17 +22,14 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.title = "";
-    this.backgroundColor = "blue";
-    
+    this.pages = [];
   }
 
   // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
-      title: { type: String },
-      backgroundColor: { type: String },
+      pages: { type: Array },
     };
   }
 
@@ -41,25 +38,36 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
     return [super.styles,
     css`
       :host {
-        display: block;
-        color: var(--ddd-theme-primary);
-        background-color: blue;
         font-family: var(--ddd-font-navigation);
-        width: calc(100vw - 24px);
-        height: calc(100vh);
+        height: 100vh;
+        background-color: var(--ddd-theme-default-beaverBlue);
+      }
 
-      }
-      .wrapper {
-        padding: var(--ddd-spacing-4);
-      }
       h3 span {
         font-size: var(--portfolio-very-theme-label-font-size, var(--ddd-font-size-s));
       }
-      .title {
-        font-size: var(--portfolio-very-theme-title-font-size, var(--ddd-font-size-l));
-        color: var(--portfolio-very-theme-title-color, var(--ddd-theme-primary));
-        text-align: center;
+      
+      scroll-button {
+        position: fixed;
+        bottom: var(--ddd-spacing-5);
+        right: var(--ddd-spacing-5);  
+      }
 
+      a {
+        color: white;
+        font-size: var(--portfolio-very-theme-label-font-size, var(--ddd-font-size-s));
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      li {
+        list-style: none;
+        display: inline-block;
+      }
+      
+      .wrapper {
+        background-color: blue;
+        width: calc(100vw - 24px);
       }
     `];
   }
@@ -67,9 +75,33 @@ export class PortfolioVeryTheme extends DDDSuper(I18NMixin(LitElement)) {
   // Lit render the HTML
   render() {
     return html`
-    <div class="wrapper">
-      <h1 class="title">${this.title}</h1>
-    </div>`;
+    <top-bar>
+      ${this.pages.map((page, index) => html`<li><a href="#${page.number}" @click="${this.linkChange}" data-index="${index}">${page.title}</a></li>`)}
+    </top-bar>
+    <div class="wrapper" @page-added="${this.addPage}">
+      <slot></slot>
+    </div>
+    <scroll-button></scroll-button>
+    `;
+  }
+
+  linkChange(e) {
+    let number = parseInt(e.target.getAttribute('data-index'));
+    if(number >= 0) {
+      this.pages[number].element.scrollIntoView();
+    }
+  }
+
+  
+  addPage(e) {
+    const element = e.detail.value
+    const page = {
+      number: element.pageNumber,
+      title: element.title,
+      element: element, 
+    }
+    this.pages = [...this.pages, page];
+
   }
 
   /**
